@@ -36,12 +36,12 @@
         <h1 id="balance"> </h1>
         <!-- Actions -->
   <div class="card-actions">
-    <button id="transferer">
+    <button id="transferer" onclick=window.location.href="/src/view/transferer.html">
       <img src="/assets/depot.png" alt="Transférer">
       Transférer
     </button>
 
-    <button id="recharger">
+    <button id="recharger" onclick=window.location.href="/src/view/recharger.html">
       <img src="/assets/trans.png" alt="Recharger">
       Recharger
     </button>
@@ -53,23 +53,25 @@
     
   </div>
       </div>
-      <!-- Paiement Form -->
-      <div class="container">
+    
   
-
  
 
   <!-- Hidden form -->
-  <form id="payForm" style="display:none;">
-    <h2>Paiement</h2><br>
+   
+  <!-- <form id="payForm" style="display:none;">
+    <!-- Paiement Form -->
+      <!-- <div class="container"> <!--could use div before hidden form so it contains the 3 forms at once ? :)-->
+    <!-- <h2>Paiement</h2><br>
     Montant à payer: <input type="number" min="100" id="pay"><br>
-    Description: <input type="text" id="description"><br>
+    Description: <input type="text" id="description"><br> -->
      <!-- Button -->
-  <button type="submit" id="payBtn">Payer</button>
-  </form>
-
+  <!-- <button type="submit" id="payBtn">Payer</button>
+  
   <h3 id="msg"></h3>
 </div>
+  </form> - -->
+ 
 
 
       <div class="card stats-card">
