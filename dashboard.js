@@ -11,7 +11,8 @@ if(currentUser && currentUser.nom){
     // Optional: redirect to login if no user
      window.location.href = "/src/view/index.html";
 } */
-//import {users,findUser} from "../Model/Data.js";    
+//import {users,findUser} from "../Model/Data.js"; 
+   
 const welcome_message = document.getElementById("welcome_message");
 const balance=document.getElementById("balance");
 
@@ -24,28 +25,54 @@ const transactions_table=document.getElementById("transactions");
 const transferbtn=document.getElementById("transferer");
 const rechargebtn=document.getElementById("recharger");
 
+//rediriger vers transfer.html
+transferbtn.addEventListener("click",()=>{
+    window.location.href="../View/transfer.html";
+});
+
 //afficher transactions
 const tab=currentUser.transactions;
+
 const affichetransactions=(tab)=>{ //fct prend un argument we gotte know which table
     transactions_table.innerHTML="";
     tab.forEach((u)=>{
-    const row=document.createElement("tr");
-    row.innerHTML="<td>"+u.date+"</td><td>"+u.description+"</td><td>"+u.type+"</td><td>"+u.amount+" MAD</td>";//coud use +montant or -montant selon type
-    transactions_table.appendChild(row);
-})
+      const row=document.createElement("tr");
+      row.innerHTML="<td>"+u.date+"</td><td>"+u.description+"</td><td>"+u.type+"</td><td>"+u.amount+" MAD</td>";//coud use +montant or -montant selon type
+      transactions_table.appendChild(row);
+    })
 }
 affichetransactions(tab);
 
 
+const filtrer=document.getElementById("filtrer");
+
+filtrer.addEventListener("change",handlefilter);//we do not click only we change :)
+function handlefilter(){
+    let t;
+    //console.log(filtrer.value==="cred"); //verifier value 
+    if(filtrer.value==="cred") {
+        t=currentUser.transactions.filter((u)=>u.type==="+");
+         affichetransactions(t);
+    
+        
+    }else if(filtrer.value==="deb"){
+        t=currentUser.transactions.filter((u)=>u.type==="-");
+        affichetransactions(t);
+    }
+    else{
+       affichetransactions(tab);
+    }
+
+ }
+
 const paybtn=document.getElementById("payer");
-const payForm=document.getElementById("payForm");
+paybtn.addEventListener("click",()=>{
+    window.location.href="../View/payer.html";
+});
+/* 
 const payAmount=document.getElementById("pay");
 const describe=document.getElementById("description");
 
-// PAYER 
-paybtn.addEventListener("click",()=>{
-    payForm.style.display="block";
-});
 
 function checkUser(){
     return new Promise((resolve,reject)=>{
@@ -59,7 +86,7 @@ function checkUser(){
 
 function checkSolde(currentUser,montant){
     return new Promise((resolve,reject)=>{
-        if(currentUser.solde>montant)
+        if(currentUser.solde>=montant)
             resolve(currentUser);
         else
             reject("solde insuffisant");
@@ -85,8 +112,15 @@ function updateSolde(currentUser,montant){
         currentUser.solde -= montant;
         resolve(currentUser)
       })
-}
+} */
+// const payForm=document.getElementById("payForm");
 
+
+// PAYER 
+/* paybtn.addEventListener("click",()=>{
+    payForm.style.display="block";
+}); */ 
+/* 
 payForm.addEventListener("submit",(e)=>{
     e.preventDefault();
     const montant=parseFloat(payAmount.value);// convert string to number
@@ -114,24 +148,9 @@ payForm.addEventListener("submit",(e)=>{
             alert();
         });
 });
+ */
 
 
-
-
-//update? DB TT  
-function updateUserInDB(currUser){
-    let usersDB = JSON.parse(sessionStorage.getItem("users")) || [];
-    console.log("Before update:", usersDB);//vide?
-
-    const updatingUser = usersDB.find(u => u.email === currUser.email && u.password === currUser.password);
-    if (updatingUser){
-        updatingUser.solde = currUser.solde;
-        updatingUser.transactions = currUser.transactions;
-    }
-
-    sessionStorage.setItem("users", JSON.stringify(usersDB));
-    console.log("After update:", usersDB);
-}
 
 
 
@@ -140,25 +159,5 @@ function updateUserInDB(currUser){
    
    
 
-const filtrer=document.getElementById("filtrer");
-
-filtrer.addEventListener("change",handlefilter);//we do not click only we change :)
-function handlefilter(){
-    let t;
-    //console.log(filtrer.value==="cred"); //verifier value 
-    if(filtrer.value==="cred") {
-        t=currentUser.transactions.filter((u)=>u.type==="+");
-         affichetransactions(t);
-    
-        
-    }else if(filtrer.value==="deb"){
-        t=currentUser.transactions.filter((u)=>u.type==="-");
-        affichetransactions(t);
-    }
-    else{
-       affichetransactions(tab);
-    }
-
-    }
 
        
