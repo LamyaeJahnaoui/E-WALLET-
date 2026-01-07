@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfert</title>
+    <style>
+        .container{
+            background: linear-gradient(to left, #d1adf3, #becff5);
+            color: rgb(15, 61, 102);
+            width: 500px;
+            margin: 50px auto;
+            padding: 30px 20px;
+            border-radius: 50px;
+            box-shadow: 10px 8px 20px rgba(240, 15, 240, 0.1);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Recharger </h2> 
+        <!--delete form so it works-->
+     
+        Numero de carte: <input id="numCarte" type="text" ><br>
+            
+        Montant a recharger : <input type="number" min="1"  id="recharge"><br>
+        
+        <h3 id="msg"></h3>
+        <button id="rechargebtn" >Recharger</button>
+     
+
+    </div>
+    <script type="module" src="/src/Controller/rechargerController.js"></script>
+    
+    
+</body>
+</html>
